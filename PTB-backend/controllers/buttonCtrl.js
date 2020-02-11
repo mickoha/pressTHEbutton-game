@@ -4,14 +4,14 @@ const Button = require('../models/button')
 
 buttonRouter.get('/', async (req, res) => {
   const info = await Button.find({})
-  response.json(info)
+  res.json(info)
 })
 
-buttonRouter.post('/', async(request, response) => {
+buttonRouter.post('/', async(req, res) => {
   const button = new Button({count: 0, lastToken: "start", id: 1})
-  const result = await button.save();
+  const result = await button.save()
 
-  response.status(201).json(result)
+  res.status(201).json(result)
   
 })
 

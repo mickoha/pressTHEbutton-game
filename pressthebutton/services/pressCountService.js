@@ -9,7 +9,6 @@ const getInfo = async() => {
 
 const pressButton = async(props) => {
   const token = props.token
-  const res = getInfo();
   const response = await axios.put(baseUrl, body)
   return response.data
 }
