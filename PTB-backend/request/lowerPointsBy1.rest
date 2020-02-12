@@ -1,0 +1,6 @@
+PUT http://localhost:3003/api/user/5e42559bd1fc961da0e2c868
+Content-Type: application/json
+
+{
+  "points": 17
+}

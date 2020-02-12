@@ -15,11 +15,10 @@ userRouter.post('/', async (req, res) => {
 })
 
 userRouter.put('/:id', async (req, res) => {
-  const id = req.params.id
-  const pointshange = req.body.points
-
   const updatedPoints = await User 
-    .findByIdAndUpdate(id, {points: points + pointshange})
+    .findByIdAndUpdate(req.params.id, {points: req.body.points})
+
+  res.json(updatedPoints)
 })
 
 module.exports = userRouter
