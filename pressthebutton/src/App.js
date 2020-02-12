@@ -1,9 +1,13 @@
 import React from 'react';
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+import NewUserScreen from './components/newUser'
+
 const App = (props) => {
   return (
-    <div>
-      <p>ButtonGame</p>
+    <div className='container'>
+      <NewUserScreen />
     </div>
   )
 }
