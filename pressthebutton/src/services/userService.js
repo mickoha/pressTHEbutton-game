@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = '/api/blogs'
+const baseUrl = 'http://localhost:3003/api/user'
 
 const getUsers = async() => {
   const response = await axios.get(baseUrl)
@@ -7,6 +7,7 @@ const getUsers = async() => {
 }
 
 const createUser = async newObject => {
+  console.log(newObject)
   const user = {
     "username": newObject,
     "points": 20
@@ -14,3 +15,12 @@ const createUser = async newObject => {
   const response = await axios.post(baseUrl, user)
   return response.data
 }
+
+const updatePoints = async newObject => {
+  const points = {
+    points: newObject.points
+  }
+  const res = axios.put(`${baseUrl}/${newObject.id}`, points)
+  return res.data
+}
+export default {getUsers, createUser, updatePoints}

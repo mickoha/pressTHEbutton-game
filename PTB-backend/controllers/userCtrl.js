@@ -15,6 +15,7 @@ userRouter.post('/', async (req, res) => {
 })
 
 userRouter.put('/:id', async (req, res) => {
+  console.log(req.body.points)
   const updatedPoints = await User 
     .findByIdAndUpdate(req.params.id, {points: req.body.points})
 
