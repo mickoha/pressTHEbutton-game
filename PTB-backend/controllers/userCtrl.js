@@ -17,10 +17,13 @@ userRouter.post('/', async (req, res) => {
 })
 
 userRouter.put('/:id', async (req, res) => {
+  const user = {
+    ...req.body
+  }
   const updatedPoints = await User 
-    .findByIdAndUpdate(req.params.id, {points: req.body.points})
+    .findOneAndUpdate({_id: req.params.id}, user)
 
-  res.json(updatedPoints)
+  res.json(user)
 })
 
 module.exports = userRouter
