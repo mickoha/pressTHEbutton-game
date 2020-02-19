@@ -20,7 +20,8 @@ const updatePoints = async newObject => {
   const points = {
     points: newObject.points
   }
-  const res = axios.put(`${baseUrl}/${newObject.id}`, points)
+  const res = await axios.put(`${baseUrl}/${newObject.id}`, points)
+  console.log("1 ", res.data)
   return res.data
 }
 export default {getUsers, createUser, updatePoints}

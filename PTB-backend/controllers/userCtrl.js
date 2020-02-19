@@ -7,6 +7,8 @@ userRouter.get('/', async (req, res) => {
   res.json(users)
 })
 
+
+
 userRouter.post('/', async (req, res) => {
   const newUser = new User(req.body)
   const result = await newUser.save()
@@ -15,7 +17,6 @@ userRouter.post('/', async (req, res) => {
 })
 
 userRouter.put('/:id', async (req, res) => {
-  console.log(req.body.points)
   const updatedPoints = await User 
     .findByIdAndUpdate(req.params.id, {points: req.body.points})
 
