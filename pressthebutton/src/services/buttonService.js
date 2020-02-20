@@ -7,9 +7,19 @@ const getButton = async() => {
   return response.data;
 }
 
+const startGame = async() => {
+  const res = await axios.post(baseUrl)
+  return res.data
+}
+
+const deleteGame = async() => {
+  const res = await axios.delete(baseUrl)
+  return res.data
+}
+
 const pressButton = async () => {
   const res = await axios.put(baseUrl)
   return res.data
 }
 
-export default {getButton, pressButton}
+export default {getButton, startGame, deleteGame, pressButton}

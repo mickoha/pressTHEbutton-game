@@ -39,6 +39,7 @@ const App = (props) => {
       
     }
   }, [])
+  
 
   // Gets button from mongoDB.
   useEffect(() => {
@@ -89,6 +90,12 @@ const App = (props) => {
     
   }
 
+  const newButton = () => {
+    buttonService.startGame()
+    window.location.reload()
+  }
+
+  
   const notification = (props) =>{
     return (
       <div className='awardNotification'>
@@ -107,10 +114,11 @@ const App = (props) => {
     )
   }
 
-  if (button === null) {
+  if (button === null || button === undefined) {
     return (
       <div>
         <h3>loading...</h3>
+        <button onClick={newButton}>new game?</button>
       </div>
     )
   } else {
@@ -123,6 +131,7 @@ const App = (props) => {
           buttonCount={button} 
           userInfo={user} 
           handlePress={handlePress}/>
+          
           {awardNotification && notification(awardNotification)}
       </div>
     )

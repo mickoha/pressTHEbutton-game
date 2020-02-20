@@ -15,6 +15,11 @@ buttonRouter.post('/', async(req, res) => {
   
 })
 
+buttonRouter.delete('/', async(req, res) => {
+  const res2 = await Button.remove({})
+  res.status(201).json(res2)
+})
+
 buttonRouter.put('/', async (request, response) => {
   const count = await Button.find({id: 1})
   const newCount = count[0].count +1

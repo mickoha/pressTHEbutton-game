@@ -18,7 +18,7 @@ const GameScreen = (props) => {
   const handlePress = async (event) => {
     event.preventDefault()
     const user = {...props.userInfo, points: 20}
-    const res = await userService.updatePoints(user)
+    await userService.updatePoints(user)
     window.location.reload();
   }
 

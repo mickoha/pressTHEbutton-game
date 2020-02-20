@@ -11,6 +11,8 @@ const userRouter = require('./controllers/userCtrl')
 app.use(cors())
 app.use(bodyParser.json())
 
+app.use(express.static('build'))
+
 console.log('connecting to ', config.MONGODB_URI)
 
 mongoose.connect(config.MONGODB_URI, {useNewUrlParser: true})
