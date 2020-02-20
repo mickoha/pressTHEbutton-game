@@ -12,9 +12,11 @@ import userService from './services/userService';
 const App = (props) => {
   const [user, setUser] = useState(null)
   const [button, setButton] = useState(null)
-  const [awardNotification, setAwardNotification] = useState("")
+  const [awardNotification, setAwardNotification] = useState(null)
   const [startOver, setStartOver] = useState(false)
 
+
+  // Find logged user from mongoDB
   useEffect(() => {
     const loggedUser = window.localStorage.getItem('loggedButtonGamePlayer')
     if (loggedUser) {
@@ -24,7 +26,12 @@ const App = (props) => {
       async function getUser() {
         const users = await userService.getUsers()
         const thisUser = users.find(user => user.username === usernameTmp)
-        setUser(thisUser)
+        if (thisUser) {
+          setUser(thisUser)
+        } else {
+          // If deleted from mongoDB, delete from browser.
+          window.localStorage.removeItem('loggedButtonGamePlayer')
+        }
       }
 
       getUser()
@@ -33,18 +40,11 @@ const App = (props) => {
     }
   }, [])
 
+  // Gets button from mongoDB.
   useEffect(() => {
     buttonService.getButton().then(button => setButton(button[0]))
   },[])
-  
-  if (user === null) {
-    return (
-      <div className='container'>
-        <h1>pressTHEbutton</h1>
-        <NewUserScreen />
-      </div>
-    )
-  }
+ 
   
   const handlePress = async (props) => {
     let user2 = {
@@ -58,7 +58,7 @@ const App = (props) => {
 
     let pointsTmp = 0
 
-    console.log(countATM)
+    // Size of award
     if (countATM % 500 === 0) {
       pointsTmp = 250
     } else if (countATM % 100 === 0) {
@@ -67,13 +67,19 @@ const App = (props) => {
       pointsTmp = 5
     }
 
-    console.log(pointsTmp)
+    // Set awardNotification for 2sec
+    if (pointsTmp !== 0) {
+      setAwardNotification(pointsTmp)
+      setTimeout(function() {
+        setAwardNotification(null)
+      }, 2000)
+    }
+
     user2 = {
       ...user2, points: user2.points + pointsTmp - 1
     }
-    console.log(user2)
-    const res2 = await userService.updatePoints(user2)
 
+    const res2 = await userService.updatePoints(user2)
 
     if (res2.points === 0) {
       setStartOver(true)
@@ -81,6 +87,24 @@ const App = (props) => {
     
     setUser(res2)
     
+  }
+
+  const notification = (props) =>{
+    return (
+      <div className='awardNotification'>
+        <h1>YOU GOT {props} POINTS!</h1>
+      </div>
+    )
+  }
+
+   
+  if (user === null) {
+    return (
+      <div className='container'>
+        <h1>pressTHEbutton</h1>
+        <NewUserScreen />
+      </div>
+    )
   }
 
   if (button === null) {
@@ -92,12 +116,14 @@ const App = (props) => {
   } else {
     return (
       <div>
+      
         <GameScreen 
           startOver={startOver}
           awardNotification={awardNotification} 
           buttonCount={button} 
           userInfo={user} 
           handlePress={handlePress}/>
+          {awardNotification && notification(awardNotification)}
       </div>
     )
   }

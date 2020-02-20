@@ -18,6 +18,27 @@ body {
   padding-right: 0;
 }
 
+
+
+.awardNotification {
+  border-radius: 25% 25%;
+  border-color: black;
+  position: absolute;
+  left: 100px;
+  right: 100px;
+  top: 5em;
+  background-color: lightgreen;
+  opacity: 0.8;
+  
+}
+
+p {
+  font-family: "Great Vibes";
+  color:#d54d7b;
+  font-size: 1.5em;
+  text-shadow: 0 2px 2px #fff;
+}
+
 h1 { 
   color: #d54d7b;
   font-family: "Great Vibes", cursive; 

@@ -42,10 +42,10 @@ const GameScreen = (props) => {
       
       <div className='points'>
         <p>{props.userInfo.username}</p>
-        <p>points: {props.userInfo.points}</p>
+        <p>points: <strong>{props.userInfo.points}</strong></p>
       </div>
       <button onClick={props.handlePress} className="button1">PRESS THIS</button>
-      <p>How many presses for the next award? <br></br>{tmp4}</p>
+      <p>Keep going! <strong>{tmp4}</strong> more press for the next award!</p>
     </div>
     )
   }
