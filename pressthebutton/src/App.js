@@ -90,12 +90,13 @@ const App = (props) => {
     
   }
 
+  // If there is no button to press, start new game
   const newButton = () => {
     buttonService.startGame()
     window.location.reload()
   }
 
-  
+
   const notification = (props) =>{
     return (
       <div className='awardNotification'>
